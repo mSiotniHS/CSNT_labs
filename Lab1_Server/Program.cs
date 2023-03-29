@@ -18,7 +18,7 @@ var listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, Pro
 try
 {
 	listenSocket.Bind(ipEndPoint);
-	listenSocket.Listen(10);  // максимальное число подключений в очереди
+	listenSocket.Listen(10);
 
 	Console.WriteLine("Сервер запущен. Ожидание подключений...");
 
