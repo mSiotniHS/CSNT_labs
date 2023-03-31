@@ -24,7 +24,8 @@ try
 
 	while (true)
 	{
-		var handler = listenSocket.Accept();  // блокирует, пока не появится клиент
+		// блокирует, пока не появится клиент
+		var handler = listenSocket.Accept();
 
 		var builder = new StringBuilder();
 
@@ -40,7 +41,8 @@ try
 
 		Console.WriteLine($"[{DateTime.Now.ToShortTimeString()}] {builder} ({totalBytes} bytes)");
 
-		handler.Send(Encoding.Unicode.GetBytes(builder.ToString()));  // !
+		// отправляем ответ клиенту
+		handler.Send(Encoding.Unicode.GetBytes(builder.ToString()));
 
 		// рекомендованный способ
 		// ref: https://learn.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.close?view=net-8.0#system-net-sockets-socket-close:~:text=call%20Shutdown%20before%20calling%20the%20Close

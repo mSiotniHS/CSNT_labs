@@ -22,7 +22,7 @@ try
 	var answer = new byte[256];
 	do
 	{
-		// будет ждать, пока сервер что-нибудь не отправит!
+		// будет блокировать, пока не придут данные!
 		var bytes = socket.Receive(answer, answer.Length, 0);
 		builder.Append(Encoding.Unicode.GetString(answer, 0, bytes));
 	} while (socket.Available > 0);
