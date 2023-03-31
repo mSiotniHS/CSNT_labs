@@ -1,0 +1,19 @@
+﻿#+TITLE: Отчёт по лабораторной работе №0
+#+AUTHOR: Артём Абрамян
+#+OPTIONS: toc:nil date:nil timestamp:nil
+
+* Скриншоты работы
+
+** ~ipconfig~
+
+[[./imgs/ipconfig_1.png]]
+
+[[./imgs/ipconfig_2.png]]
+
+** Программа
+
+[[./imgs/app.png]]
+
+* Исходный код
+
+#+INCLUDE: "../Program.cs" src csharp
