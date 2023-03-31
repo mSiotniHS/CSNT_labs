@@ -1,0 +1,17 @@
+﻿#+TITLE: Отчёт по лабораторной работе №1
+#+AUTHOR: Абрамян Артём
+#+OPTIONS: toc:nil date:nil timestamp:nil
+
+* Скриншот работы
+
+[[./imgs/app.png]]
+
+* Исходный код
+
+** Сервер
+
+#+INCLUDE: "../Program.cs" src csharp
+
+** Клиент
+
+#+INCLUDE: "../../Lab1_Client/Program.cs" src csharp
