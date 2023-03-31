@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
@@ -16,9 +15,8 @@ try
 
 	Console.Write("Введите сообщение: ");
 	var message = Console.ReadLine();
-	Debug.Assert(message != null, nameof(message) + " != null");
 
-	var data = Encoding.Unicode.GetBytes(message);
+	var data = Encoding.Unicode.GetBytes(message!);
 	socket.Send(data);
 
 	var answer = new byte[256];
