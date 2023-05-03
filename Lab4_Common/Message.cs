@@ -1,4 +1,4 @@
 ﻿namespace Lab4_Common;
 
 [Serializable]
-public record Message(string Sender, string Content, DateTime DateTime);
+public record Message(int UserId, string Content, DateTime DateTime);
