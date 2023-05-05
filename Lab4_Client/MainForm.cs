@@ -50,7 +50,20 @@ public partial class MainForm : Form
 	{
 		while (true)
 		{
-			var rawPackages = Utilities.SplitRawPackages(GetData());
+			var rawData = GetData();
+			if (rawData is null)
+			{
+				MessageBox.Show(
+					@"Возможно, сервер отключился. Аварийно завершаю работу.",
+					@"Ошибка сокета",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
+				Close();
+
+				return;
+			}
+
+			var rawPackages = Utilities.SplitRawPackages(rawData);
 
 			foreach (var rawPackage in rawPackages)
 			{
@@ -73,14 +86,28 @@ public partial class MainForm : Form
 		}
 	}
 
-	private string GetData()
+	private string? GetData()
 	{
 		var answer = new byte[256];
 		var builder = new StringBuilder();
 
 		do
 		{
-			var bytes = _socket.Receive(answer, answer.Length, 0);
+			var bytes = 0;
+			try
+			{
+				bytes = _socket.Receive(answer);
+			}
+			catch (SocketException)
+			{
+				return null;
+			}
+
+			if (bytes == 0)
+			{
+				return null;
+			}
+
 			builder.Append(Encoding.Unicode.GetString(answer, 0, bytes));
 		} while (_socket.Available > 0);
 
