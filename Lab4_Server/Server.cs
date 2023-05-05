@@ -13,6 +13,7 @@ public sealed class Server
 	private readonly List<Socket> _clientHandlers;
 	private readonly Chat _chat;
 	private int _totalClientCount;
+	private readonly object _threadLock = new();
 
 	public Server(int maxClientCount)
 	{
@@ -118,7 +119,13 @@ public sealed class Server
 			);
 
 			Console.WriteLine($"Получил новое сообщение от клиента №{clientId}: {rawMessage}");
-			var message = AddMessage(clientId, rawMessage);
+
+			Message message;
+			lock (_threadLock)
+			{
+				message = new Message(clientId, rawMessage, DateTime.Now);
+				_chat.Messages.Add(message);
+			}
 
 			Console.WriteLine($"Отправляю всем клиентам новое сообщение (от №{clientId})");
 			foreach (var clientHandler in _clientHandlers)
@@ -130,13 +137,5 @@ public sealed class Server
 				Console.WriteLine("Отправил новое сообщение очередному клиенту");
 			}
 		}
-	}
-
-	private Message AddMessage(int clientId, string content)
-	{
-		var newMessage = new Message(clientId, content, DateTime.Now);
-		_chat.Messages.Add(newMessage);
-
-		return newMessage;
 	}
 }
