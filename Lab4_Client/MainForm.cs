@@ -146,4 +146,12 @@ public partial class MainForm : Form
 	    _socket.Shutdown(SocketShutdown.Both);
 	    _socket.Close();
     }
+
+    private void MessageTextBox_KeyPress(object sender, KeyPressEventArgs e)
+    {
+	    if (e.KeyChar != (char) Keys.Enter) return;
+
+	    SendMessage();
+	    e.Handled = true;
+    }
 }

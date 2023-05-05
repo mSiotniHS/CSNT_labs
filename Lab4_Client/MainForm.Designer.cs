@@ -98,6 +98,7 @@ partial class MainForm
             this.MessageTextBox.PlaceholderText = "Сообщение";
             this.MessageTextBox.Size = new System.Drawing.Size(235, 38);
             this.MessageTextBox.TabIndex = 0;
+            this.MessageTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MessageTextBox_KeyPress);
             // 
             // SendButton
             // 
