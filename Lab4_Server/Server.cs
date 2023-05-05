@@ -66,7 +66,7 @@ public sealed class Server
 		while (true)
 		{
 			var clientHasDisconnected = false;
-			var data = new byte[255];
+			var data = new byte[256];
 			var builder = new StringBuilder();
 
 			do

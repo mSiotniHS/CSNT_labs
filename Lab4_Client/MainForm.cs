@@ -32,7 +32,10 @@ public partial class MainForm : Form
 
 	private void SendMessage()
 	{
-        var text = MessageTextBox.Text.Trim();
+        var text = MessageTextBox.Text
+	        .Trim()
+	        .Trim(Environment.NewLine.ToCharArray())
+	        .Trim();
         if (text == string.Empty) return;
 
         _socket.Send(
@@ -88,7 +91,7 @@ public partial class MainForm : Form
 
 	private string? GetData()
 	{
-		var answer = new byte[256];
+		var data = new byte[256];
 		var builder = new StringBuilder();
 
 		do
@@ -96,7 +99,7 @@ public partial class MainForm : Form
 			var bytes = 0;
 			try
 			{
-				bytes = _socket.Receive(answer);
+				bytes = _socket.Receive(data);
 			}
 			catch (SocketException)
 			{
@@ -108,7 +111,7 @@ public partial class MainForm : Form
 				return null;
 			}
 
-			builder.Append(Encoding.Unicode.GetString(answer, 0, bytes));
+			builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
 		} while (_socket.Available > 0);
 
 		return builder.ToString();
