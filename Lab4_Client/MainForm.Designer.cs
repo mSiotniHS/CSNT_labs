@@ -62,6 +62,8 @@ partial class MainForm
             this.ChatBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChatBox.Location = new System.Drawing.Point(3, 19);
             this.ChatBox.Name = "ChatBox";
+            this.ChatBox.ReadOnly = true;
+            this.ChatBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.ChatBox.Size = new System.Drawing.Size(318, 461);
             this.ChatBox.TabIndex = 0;
             this.ChatBox.Text = "";
