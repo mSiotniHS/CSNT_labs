@@ -30,15 +30,20 @@ public partial class MainForm : Form
 		receivingThread.Start();
 	}
 
+	private void SendMessage()
+	{
+        var text = MessageTextBox.Text.Trim();
+        if (text == string.Empty) return;
+
+        _socket.Send(
+            Encoding.Unicode.GetBytes(
+                PackageWrapper.Wrap(text).Serialize()));
+        MessageTextBox.Clear();
+    }
+
 	private void SendButton_Click(object sender, EventArgs e)
 	{
-		var text = MessageTextBox.Text.Trim();
-		if (text == string.Empty) return;
-
-		_socket.Send(
-			Encoding.Unicode.GetBytes(
-				PackageWrapper.Wrap(text).Serialize()));
-		MessageTextBox.Clear();
+		SendMessage();
 	}
 
 	private void ReceiveUpdates()
