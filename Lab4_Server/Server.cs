@@ -38,6 +38,7 @@ public sealed class Server
 			{
 				var handler = listenSocket.Accept();
 				Console.WriteLine("Клиент подключился");
+
 				_totalClientCount++;
 				_clientHandlers.Add(handler);
 
